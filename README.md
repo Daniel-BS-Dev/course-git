@@ -1,94 +1,78 @@
-# O que é HTTP
- É um protocolo de comunicação entre sistemas de informação que permite a transferência de dados entre redes de computadores, principalmente na World Wide Web (Internet).
+# Git
 
-# HTTPS
+- link comandos do git - https://devhints.io/git-log;
 
-O HTTPS não guarda estado cada requisição ela é unica no mundo web, sendo assim através do login a minha requisição manda uma mensagem para o navegador para ele guardar minhas informações a tecnologia de sessão só é possivel por que no navegador guarda cookies
+### comandos básicos adicionar, salvar, remover, ver status
+- git init - Inicializa um repositório no diretório em que o comando for executado. A partir deste comando, o Git poderá gerenciar as modificações realizadas nos arquivos.
+- git add index.html - Adiciona o projeto HTML
+- git add . - Adiciona todos os projetos na pasta
+- git rm - Remove o arquivo. Assim o git para de monitorar o arquivo
+- git commit -m "" - Salvar uma mensagem
+- git status - Informações do git
 
-# HTTP (REQUEST-RESPONSE)
-- O protocolo HTTP segue o modelo REQUISIÇÃO-RESPOSTA
-- Uma requisição precisa ter todas as informações para o servidor gerar a resposta
-- HTTP é STATLESS!(Não matém informações entre requisições, não guarda estado)
-- As plataformas de desenvolvimento usam sessões para guardar informações entre requisições
+### comandos de log, mostrar informações
+- git log - Mostra diversas informações: resh do commit, branch local em que a gente está, autor do commit, data e mensagem
+- git log --oneline -mostra as informações de log de forma resumida
+- git log -p - ver todas as informações incluindo mudanças no projeto
+- git log --author="nameDoAutor" - Mostra os gits feitos pelo autor
+- git log --pretty="format:%H" - Mostra apenas o resh
+- git log --pretty="format:%H %s %ae" - Mostra apenas o resh, messagem e autor
 
-# O que é uma sessão HTTP
+## Criando um servidor local, adicinar um repositorio
+- criar a pasta servidor, entrar na pasta
+- git init --bare - repositorio para controlar modificações, não vou editar arquivo só vai servir para alterar as alterações. O comando --bare permite adicionar o repositorio em outro
 
-Uma sessão HTTP nada mais é que um tempo que o cliente permanece ativo no sistema! Isso é parecido com uma sessão no cinema. Uma sessão, nesse contexto, é o tempo que o cliente usa a sala no cinema para assistir a um filme. Quando você sai da sala, termina a sessão. Ou seja, quando você se desloga, a Alura termina a sua sessão.
+### usando o servidor na pasta daniel
+- git remote - na pasta que eu quero usar o servidor. Lista todos os repositorios que o meu arquivo conhece, como ainda não tenho repositorio vamos adicionar
+- git remote add "name" "caminhoDoMeuServidor"
+- git remote - agora sim eu tenho um repositorio remoto
+- git remote -v - mostra o endereço do repositorio
 
-# Segurança HTTPS
+### clonado o servidor na pasta ana
+- mkdir - criar pasta
+- cd "nomeDaPasta" - entrar na pasta
+- git clone "/c/DaPasta"caminho/  "nome"
 
-No certificado, vem a chave pública para o cliente utilizar, certo? E o servidor continua na posse da chave privada, ok? Isso é seguro, mas lento e por isso o cliente gera uma chave simétrica ao vivo. Uma chave só para ele e o servidor com o qual está se comunicando naquele momento! Essa chave exclusiva (e simétrica) é então enviada para o servidor utilizando a criptografia assimétrica (chave privada e pública) e então é utilizada para o restante da comunicação.
+### pasta daniel vai enviar os dados para o servidor
+- git remote - ver o nome repositorio local
+- git push "nameDoRepoteAdicionado" master - enviando meu repositorio local para master
 
-Então, HTTPS começa com criptografia assimétrica para depois mudar para criptografia simétrica. Essa chave simétrica será gerada no início da comunicação e será reaproveitada nas requisições seguintes. Bem-vindo ao mundo fantástico do HTTPS :)
+### na pasta em que eu clonei o servidor da ana pegar os dados do servidor
+- git remote - ver o nome do meu repositorio
+- git remote rename "nomeDoRepositorioAtual "novoNameDoRepositorio" - para alterar o nome do meu repositorio caso queira
+- git pull "nomeDoRepositorio" master - pegando os dados
 
-# Servidor DNS
+### ana fez um mudança no projeto
+- git add "nomeDoArquivo" - adicionar
+- git commit -m "msgm" - adicionando mensagem
+- git push "nomeDoRepositorio" master
 
-Domani Name System resolve para me o nome de uma dominio e devolve um endereço IP 
+### daniel quer ver
+- git pull "nomeDoRepositorio" master
+- git log -p - ver qual foi a alteração
 
-# Definição de Endereço IP
-
-### HTTPS://www.alura.com.br:443/course/introducao-HTML-CSS
-
-- HTTPS: protocolo
-- www.alura.com.br: domínio
-- com: site comecial ou governamental
-- br: especifico para um determinado pais 
-- 443: porta não obrigatorio informar
-- course/introducao-HTML-CSS: area especifca de um evento
-
-# URL, URI e URN
-
-### URI
-As URIs são o padrão para identificação de documentos com uma curta sequência de números, letras e símbolos. O termo significa no Inglês Uniform Resource Identifier (URI) – Identificador de Recurso Uniforme.
-
-### URL
-URLs também seguem uma nomenclatura similar. Significa Uniform Resource Locator – Localizador de Recurso Uniforme. Nesses endereços contém informações sobre como buscar um recurso em sua localização.
-
-Quando falamos de recursos a serem buscados podem ser tanto websites completos (igual esse que você está acessando agora) quanto outros tipos de dados que são transmitidos via web em outros formatos e por meio de outros protocolos que não HTTP ou HTTPS.
-
-Exemplo:
-
-- http://website.com/pagina.html
-- ftp://website.com.br/download.zip
-- mailto:contato@website.com.br
-- file:///home/usuario/arquivo.txt
-- tel:+5511123456789
-
-### URN
-URN então, seguindo o mesmo padrão dos dois anteriores, significa Uniform Resource Name – Nome de Recurso Uniforme. Ele identifica um recurso na web através de um nome único e persistente, mas não necessariamente ele informa onde o localizar na internet. Normalmente começa com o prefixo urn:.
-
-Por exemplo:
-
-- urn:isbn:042424553 para identificar um livro através de seu número ISBN
-- urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66 como un identificador global único
-- urn:publishing:book como um XML que identifica um documento como um tipo de livro
-- URNs podem identificar ideias e conceitos. Eles não estão restritos a documentos, mas quando eles representam documentos podem ser convertidos a URLs por um “resolver”. A partir daí o documento pode ser baixado através de uma URL.
+## Criando servidor na na nuvem
 
 
-# STATUS CODE 
 
-- 2XX - Successful response
-- 3XX - Redirection messages
-- 4xx - Client error responses
-- 5xx - Server error responses
 
-- 200 OK
-- 301 Moved Permanently
-- 404 Not Found
-- 500 Internal Server Error
+- git config --local - Cada projeto
+- git config --global - O projeto como um todo
+- git config --local user.name "vinicius Dias" - Modificando o nome
+- git config user.email - ver o email
+- git config user.nome - ver o nome 
+- git remote -v - mostra o endereço do local
+- git clone "caminho" - para clonar
+- git remote rename "nomeAtual" "novoNome"
 
-# CAMINHO COM MAIS PARAMETROS
 
-HTTPS://LOCALHOST?RESULTS=CARRO&COLOR=BLACK
+## Separando o projeto 
+- git branch titulo - crinado um novo branch com o nome da parte em que vou trabalha
+- git checkout titulo - para usar a branch titulo
+- git checkout -b "nome" - criando um branch já passando a usar ele
 
-# METHODS
-
-- GET - Receber dados (params na URL)
-- POST - Submeter dados(params no corpr da requisição)
-- DELETE - Remover um recurso
-- PUT - Atualizar
-
-# HPACK
-
-O HPACK é uma tecnologia especializada em comprimir os Headers das comunicações HTTP/2. Como toda requisição HTTP acompanha algum header por padrão, uma tecnologia de compressão embutida no protocolo é demasiadamente útil para economizar dados trafegados. Guarda os dados
-Quando estamos utilizando Headers Stateful, simplesmente colocamos nas requisições os cabeçalhos que se alteraram entre uma e outra, trazendo uma enorme economia de dados, visto que toda requisição HTTP possui um cabeçalho e que, muitas vezes, no HTTP/1.1, cabeçalhos repetidos eram trafegados em todas as requisições.
+## Trazendo o trabalho de umma branch para outra
+- git checkout mster - estou na master
+- git commit -m "corrigindo bug" - fazendo o comite
+- git merge "nomedaPastaQueEuQueroUnificar" -  junta os trabalhos e gera um merge commit
+- git rebase titulo - aplica os commits de outra branch na branch atual.
