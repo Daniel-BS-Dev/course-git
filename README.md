@@ -2,13 +2,21 @@
 
 - link comandos do git - https://devhints.io/git-log;
 
-### comandos básicos adicionar, salvar, remover, ver status
+### comandos git
 - git init - Inicializa um repositório no diretório em que o comando for executado. A partir deste comando, o Git poderá gerenciar as modificações realizadas nos arquivos.
 - git add index.html - Adiciona o projeto HTML
 - git add . - Adiciona todos os projetos na pasta
 - git rm - Remove o arquivo. Assim o git para de monitorar o arquivo
 - git commit -m "" - Salvar uma mensagem
 - git status - Informações do git
+- git config --local - Cada projeto
+- git config --global - O projeto como um todo
+- git config --local user.name "vinicius Dias" - Modificando o nome
+- git config user.email - ver o email
+- git config user.nome - ver o nome 
+- git remote -v - mostra o endereço do local
+- git clone "caminho" - para clonar
+- git remote rename "nomeAtual" "novoNome"
 
 ### comandos de log, mostrar informações
 - git log - Mostra diversas informações: resh do commit, branch local em que a gente está, autor do commit, data e mensagem
@@ -51,28 +59,43 @@
 - git pull "nomeDoRepositorio" master
 - git log -p - ver qual foi a alteração
 
-## Criando servidor na na nuvem
+## Apos criar um repositorio no github, dividir o projeto em partes
+- git branch "nomeDoBranch" - criando um novo branch
+- git checkout "nomeDoBranchCriado" - comando para usar o branch criado
+- git checkout -b "nameDoBranch" - cria uma branch já adiciona a ele
 
+### Trazendo o trabalho de uma Branch a outra
+- git merge "nomeDaBranch" - traz os commits feitos no branch criado para a branch main, lebrando que esse comando criar um commit merge não salva as mensagens do meu branch anterior
+- :x e enter - para sair da tela
 
+### Salvando os commits da minha nova branch para minha master 
+- git rebase "nomeDoBranch" - com esse comnado eu não terei uma commit merge e sim os commits salvos na minha branch anterior
+- git log --graph - mostra as linhas especificas de desenvolvimento
 
+### Desfazendo alterações no git
+- git checkout -- "nomeDoArquivo" - desfaz minha alteração. isso antes de fazer o add
+- git reset HEAD "nomeDoArquivo" - desfaz minha alteração. isso depois do add
+- git log, git revert "reshDoCommit" - desfazendo uma alteração. isso depois do add e commit, o git log e pra pegar o resh do commit
 
-- git config --local - Cada projeto
-- git config --global - O projeto como um todo
-- git config --local user.name "vinicius Dias" - Modificando o nome
-- git config user.email - ver o email
-- git config user.nome - ver o nome 
-- git remote -v - mostra o endereço do local
-- git clone "caminho" - para clonar
-- git remote rename "nomeAtual" "novoNome"
+### Guardando alterações para mexer depois
+- git stash - salva minhas alterações sem comitar
+- git stash list - eu vejo a lista que esta salva no meu stash
+- git stash apply "numeroDaStash" - pega a stash
+- git drop - apaga a stash
+- git pop - pega a alteração e já apaga
 
+### Navegando entre branchs 
+- git log --oneline - comando para pegar o resh do commit escolhido
+- git checkout "reshDoCommit" - volta a parte antes de fazer esse commit
+- git checkout master - voltar para a master
 
-## Separando o projeto 
-- git branch titulo - crinado um novo branch com o nome da parte em que vou trabalha
-- git checkout titulo - para usar a branch titulo
-- git checkout -b "nome" - criando um branch já passando a usar ele
+### Vendo o que foi enserido de um commit a outro
+- git log --oneline - para pegar o resh
+- git diff "primeiroResh".."segundoResh" - comando para ver as mudanças de uma commit a outro
+- git diff - mostrar todas as mudanças antes do meu add
 
-## Trazendo o trabalho de umma branch para outra
-- git checkout mster - estou na master
-- git commit -m "corrigindo bug" - fazendo o comite
-- git merge "nomedaPastaQueEuQueroUnificar" -  junta os trabalhos e gera um merge commit
-- git rebase titulo - aplica os commits de outra branch na branch atual.
+### Gerando um codigo 0.1, codigo que não muda
+- git tag -a "nome" -m "aqui eu posso escrever uma mensagem opcional" - criando uma tag 
+- git tag - mostra as tags criadas
+- git push local "nomeDaTag" - salvando no meu repositorio local
+- git push origin "nomeDaTag" - salvando no github
