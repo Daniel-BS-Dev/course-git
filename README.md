@@ -70,7 +70,10 @@
 
 ### Salvando os commits da minha nova branch para minha master 
 - git rebase "nomeDoBranch" - com esse comnado eu não terei uma commit merge e sim os commits salvos na minha branch anterior
-- git log --graph - mostra as linhas especificas de desenvolvimento
+- git rebase -i HAED~3 - com esse comando eu estou unindo os 3 ultimos commits
+- git rebase -i "reshDoCommitAnteriorAoQueEuQueroTrabalhar" - esse comando faz a mesma coisa que o de cima
+- após executar essa linha de comando vai aparecer para mim um tela com nome pink eu tevo deixar apenas um pink que séra o que vai receber os outro, e no lugar do pink colocar um s. na proxima tela reescrever um mensagem
+- git log --graph - mostra as linhas especificas de desenvolvimento, ou seja, um grafico com informações sobre todas as bransh do projeto
 
 ### Desfazendo alterações no git
 - git checkout -- "nomeDoArquivo" - desfaz minha alteração. isso antes de fazer o add
@@ -99,3 +102,61 @@
 - git tag - mostra as tags criadas
 - git push local "nomeDaTag" - salvando no meu repositorio local
 - git push origin "nomeDaTag" - salvando no github
+
+### Copiar um commit
+- git checkout -b novo-release - criando um novo branch
+- git diff - para ver se eu alterei apenas que eu queria
+- git add. git commit - adicionando
+- git cherry-pick "reshDoCommitDesejado" - estou copiando um commit especifico
+
+### Encontrando alteração indesejada
+- git bisect start - o git inicia a busca pela alteração
+- git bisect bad HEAD - informando ao git onde o meu codigo não esta legal, ou seja, no meu estado atual que é representado pelo HEAD
+- git bisect good "reshDoPrimeiroCommitFeitoDaAlteraçãoQueEstouProcurando" - informando ao git onde o meu codigo estava legal
+- git bisect bad - caso o meu codigo ainda não esteja legal
+- git bisect good - se o meu codigo esta legal
+- git bisect bad - apos o good, o git me dar o resh do commit feito com mais informações
+- git bisect reset - eu encerro minha busca
+- git show "reshDoCommit" - eu vejo todas as informações do commit
+- git revert "reshDoCommit" - para desfazer a alteração
+
+### Encontrando o responsavel por uma alteração
+- git blame "nomeDoArquivo" - comando que mostra as alterações feitas no projeto
+
+### Para remover um Bransh
+- git branch -d "nomeDomBranch" - comando para remover um bransh
+- git branch -D "nomeDoBranch" - se ao remover der conflito por esta a frente do branch master
+
+### Como fazer um projeto real
+- git branch - mostra todas as branchs
+- git branch development - criando a branch mais proxima da master
+- git checkout development - comando para acessar um branch
+- git checkout -b feature/list-cursos - primeira release para mudificação. Lembrando que o -b é para já ir direto a branch criada
+- git checkout -b feature/home - segunda release. Lembrando que as feature são colocadas no meu bransh de development
+- git checkout development - entrando na branch development
+- git merge feature/list-cursos - trazendo as modificações do meu feature/lista-cursos para a branch de development
+- git ckeckout -b hotfix/v0.1.1 - se caso for encontrado um bug na master eu não posso fazer a alteração diretamenta a ela tenho que criar essa branch fazer a alteração e ai sim fazer o merge
+- git tag -a v0.1.1 - se eu criei a hotfix deve colocar em uma tag
+- eu não posso esquecer de trazer essas correções para o branch development
+- git ckeckout -b release/v0.2.0 - criando uma nova release para mandar o codigo para produção. se houver algum bug eu posso corrigir na minha release
+- git checkout master - tudo ok.  Entrando na master
+- git merge release/v0.2.0 - mandando para produção
+- git tag -a v0.2.0 - se eu tenho uma nova versão eu tenho um nova tag
+
+
+### Falando um pouco sobre a organização do git
+- master - hotfix
+- hotfix - bugs master
+- develop - features
+- feature
+- release - develop
+
+### Deploy com git
+- acessar o branch desejada
+- cd hooks/ - entrando na paste de hooks deste branch
+- ls - ver os eventos
+- vim post-recieve - criando um evento
+- #!/bin/sh - comando
+- git --git-dir="C:\workspace\gitHub\servidor" --work-tree="C:\workspace\gitHub\web" checkout -f - comando escrito abaixo #!/bin/sh
+- :x - pra sair
+- ls -l - ver as permições
